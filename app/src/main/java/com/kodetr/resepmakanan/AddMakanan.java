@@ -33,10 +33,10 @@ public class AddMakanan extends AppCompatActivity {
             // update
             et_nama.setText(in.getStringExtra("nama"));
             et_gambar.setText(in.getStringExtra("gambar"));
-            TAG = false;
+            TAG = true;
         } else {
             // create
-            TAG = true;
+            TAG = false;
         }
     }
 
