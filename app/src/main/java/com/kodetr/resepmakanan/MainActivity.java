@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MakananAdapter.On
                 makanan.setNama_makanan(c.getString(1));
                 makanan.setGambar(c.getString(2));
                 makananList.add(makanan);
-            } while (c.moveToFirst());
+            } while (c.moveToNext());
         }
 
         MakananAdapter adapter = new MakananAdapter(this, makananList);
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements MakananAdapter.On
                        Intent in = new Intent(MainActivity.this, AddMakanan.class);
                        in.putExtra("id", makanan.getId());
                        in.putExtra("nama", makanan.getNama_makanan());
-                       in.putExtra("gambarr", makanan.getGambar());
+                       in.putExtra("gambar", makanan.getGambar());
                        startActivity(in);
                         break;
                     case 1: // hapus
