@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class AddMakanan extends AppCompatActivity {
 
-    private EditText et_nama, et_gambar;
+    private EditText et_nama, et_gambar, et_harga, et_diskon;
     private Button btn_simpan;
 
     private MakananInterface mi;
@@ -33,16 +33,18 @@ public class AddMakanan extends AppCompatActivity {
             // update
             et_nama.setText(in.getStringExtra("nama"));
             et_gambar.setText(in.getStringExtra("gambar"));
-            TAG = false;
+            TAG = true; // TODO : Rekues error balik true dan false
         } else {
             // create
-            TAG = true;
+            TAG = false;
         }
     }
 
     private void init() {
         et_nama = findViewById(R.id.et_nama);
         et_gambar = findViewById(R.id.et_gambar);
+        et_harga = findViewById(R.id.et_harga);
+        et_diskon = findViewById(R.id.et_diskon);
         btn_simpan = findViewById(R.id.btn_simpan);
         btn_simpan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +75,7 @@ public class AddMakanan extends AppCompatActivity {
                 Toast.makeText(this, "Berhasil disimpan", Toast.LENGTH_SHORT).show();
             }else{
 
-                ResepMakanan makanan = new ResepMakanan();
-                makanan.setId(getIntent().getIntExtra("id", 0));
-                makanan.setNama_makanan(et_nama.getText().toString());
-                makanan.setGambar(et_gambar.getText().toString());
 
-                mi.update(makanan);
                 Toast.makeText(this, "Berhasil diubah", Toast.LENGTH_SHORT).show();
             }
 

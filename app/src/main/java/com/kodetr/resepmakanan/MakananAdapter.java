@@ -39,6 +39,8 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.MakananV
         final ResepMakanan makanan = makananList.get(position);
 
         holder.tvNamaMakanan.setText(makanan.getNama_makanan());
+        holder.tvHarga.setText("Rp " + makanan.getHarga());
+        holder.tvDiskon.setText(makanan.getDiskon() + "%");
         Picasso.get().load(makanan.getGambar()).into(holder.ivGambar);
 
         holder.llContainer.setOnClickListener(new View.OnClickListener() {
@@ -58,13 +60,15 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.MakananV
 
         private LinearLayout llContainer;
         private ImageView ivGambar;
-        private TextView tvNamaMakanan;
+        private TextView tvNamaMakanan, tvHarga, tvDiskon;
 
         public MakananViewHolder(@NonNull View itemView) {
             super(itemView);
             llContainer = itemView.findViewById(R.id.llContainer);
             ivGambar = itemView.findViewById(R.id.ivGambar);
             tvNamaMakanan = itemView.findViewById(R.id.tvNamaMakanan);
+            tvHarga = itemView.findViewById(R.id.tvHarga);
+            tvDiskon = itemView.findViewById(R.id.tvDiskon);
             llContainer.setOnClickListener(this);
         }
 
@@ -74,7 +78,7 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.MakananV
         }
     }
 
-    interface OnClikMakananInterface{
+    interface OnClikMakananInterface {
         void onClikMakanan(int position);
     }
 }

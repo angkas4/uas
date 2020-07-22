@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements MakananAdapter.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        init();
         read();
     }
 
@@ -52,14 +51,14 @@ public class MainActivity extends AppCompatActivity implements MakananAdapter.On
         makananList = new ArrayList<>();
 
         Cursor c = mi.read();
-        if (c.moveToFirst()) {
+        if (c.MoveToNext()) {
             do {
                 ResepMakanan makanan = new ResepMakanan();
                 makanan.setId(c.getInt(0));
                 makanan.setNama_makanan(c.getString(1));
                 makanan.setGambar(c.getString(2));
                 makananList.add(makanan);
-            } while (c.moveToNext());
+            } while (c.moveToFirst()); // TODO: error to first harus masukan MoveToNext
         }
 
         MakananAdapter adapter = new MakananAdapter(this, makananList);
@@ -81,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements MakananAdapter.On
                 switch (i){
                     case 0: // Ubah
                        Intent in = new Intent(MainActivity.this, AddMakanan.class);
-                       in.putExtra("id", makanan.getId());
                        in.putExtra("nama", makanan.getNama_makanan());
                        in.putExtra("gambar", makanan.getGambar());
                        startActivity(in);
@@ -93,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements MakananAdapter.On
                     builder1.setPositiveButton("YA", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            mi.delete(makanan.getId());
                             read();
                         }
                     });
@@ -113,11 +110,5 @@ public class MainActivity extends AppCompatActivity implements MakananAdapter.On
         builder.show();
 
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        read();
     }
 }
